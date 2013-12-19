@@ -10,6 +10,8 @@ import java.util.Properties;
 public class Tile {
 
 	//A - Properties
+	private final int INCREMENT = 1;
+	
 	protected int[] 		states;
 	protected int			noStates;
 	protected Properties 	info;
@@ -59,5 +61,45 @@ public class Tile {
 	public int[] getAllStates() {
 		
 		return states;
+	}
+	
+	public int noStates() {
+		
+		return noStates;
+	}
+	
+	//C.2 - Set Methods
+	public boolean setState( int index, int state) {
+		
+		if( index < 0 || index >= noStates)
+			return false;
+		
+		states[ index] = state;
+		return true;
+	}
+	
+	//C.2 - Other Methods
+	public void addState( int state) {
+		
+		if( noStates == 0) {
+			
+			states = new int[1];
+			noStates = 1;
+		}
+		
+		else {
+			
+			int[] temp = new int[ noStates];
+			for( int i = 0; i < noStates; i++)
+				temp[i] = states[i];
+			
+			states = new int[ noStates + INCREMENT];
+			
+			for( int i = 0; i < noStates; i++)
+				states[i] = temp[i];
+		}
+		
+		states[ noStates + 1] = state;
+		noStates++;
 	}
 }
