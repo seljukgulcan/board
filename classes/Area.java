@@ -3,7 +3,7 @@ import java.util.Iterator;
 /**
  * Area class contains bunch of tile objects.
  * 
- * @author win7
+ * @author Selçuk Gülcan
  * @version 1
  */
 

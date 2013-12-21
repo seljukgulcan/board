@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -15,6 +16,7 @@ public class Tile {
 	protected int[] 		states;
 	protected int			noStates;
 	protected Properties 	info;
+	protected ArrayList<Placeable>		objects;
 	
 	//B - Constructors
 	public Tile() {

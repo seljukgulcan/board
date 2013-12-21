@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * Board class for general use in board based games.
  * 
@@ -5,9 +7,11 @@
  * @version 1
  */
 
-public class Board {
+public class Board implements Iterator<Tile>, Iterable<Tile> {
 
 	//A - Properties
+	private int current = 0; //For implementation of iterator.
+	
 	//Direction Arrays
 	public final static int[][] DIR = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
 	public final static int[] UP = DIR[1];
@@ -15,31 +19,31 @@ public class Board {
 	public final static int[] RIGHT = DIR[4];
 	public final static int[] LEFT = DIR[3];
 	
-	protected int width;
-	protected int height;
+	protected int rows;
+	protected int cols;
 	protected Tile[][] map;
 	
 	//B - Constructors
-	public Board( int width, int height) {
+	public Board( int rows, int cols) {
 		
-		this.width = width;
-		this.height = height;
-		map = new Tile[width][height];
-		for( int i = 0; i < width; i++)
-			for( int j = 0; j < height; j++)
+		this.rows = rows;
+		this.cols = cols;
+		map = new Tile[rows][cols];
+		for( int i = 0; i < rows; i++)
+			for( int j = 0; j < cols; j++)
 				map[i][j] = new Tile();
 	}
 	
 	//C - Methods
 	//C.1 - Get Methods
-	public int getWidth() {
+	public int getRows() {
 		
-		return width;
+		return rows;
 	}
 	
-	public int getHeight() {
+	public int getCols() {
 		
-		return height;
+		return cols;
 	}
 	
 	public Tile getTile( int row, int col) {
@@ -87,5 +91,34 @@ public class Board {
 	public void addState( int row, int col, int state) {
 		
 		getTile( row, col).addState( state);
+	}
+	
+	//TODO: Exceptions should be added.
+	@Override
+	public Iterator<Tile> iterator() {
+		
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		
+		if( current < rows * cols)
+			return true;
+		
+		return false;
+	}
+
+	@Override
+	public Tile next() {
+		
+		current++;
+		return map[ current / cols][ current % cols];
+	}
+
+	@Override
+	public void remove() {
+		
+		//No remove operation is allowed in Board class.
 	}
 }
