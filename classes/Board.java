@@ -18,6 +18,7 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	public final static int[] DOWN = DIR[6];
 	public final static int[] RIGHT = DIR[4];
 	public final static int[] LEFT = DIR[3];
+	public final static int[][] STRAIGHT_DIR = {DIR[1], DIR[4], DIR[6], DIR[3]};
 	
 	protected int rows;
 	protected int cols;
@@ -31,7 +32,7 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 		map = new Tile[rows][cols];
 		for( int i = 0; i < rows; i++)
 			for( int j = 0; j < cols; j++)
-				map[i][j] = new Tile();
+				map[i][j] = new Tile( i, j);
 	}
 	
 	//C - Methods
@@ -48,7 +49,10 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Tile getTile( int row, int col) {
 		
-		return map[row][col];
+		if( row >= 0 && row < rows && col >= 0 && col < cols)
+			return map[row][col];
+		
+		return null;
 	}
 	
 	public int getState( Tile tile, int index) {
@@ -93,6 +97,44 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 		getTile( row, col).addState( state);
 	}
 	
+	public Area getAdjacentTiles( Tile tile) {
+		
+		return getAdjacentTiles( tile.row, tile.col);
+	}
+	
+	public Area getAdjacentTiles( int row, int col) {
+		
+		Area areaToReturn = new Area();
+		
+		for( int i = 0; i < STRAIGHT_DIR.length; i++) {
+			
+			Tile tileToAdd = getTile( row + STRAIGHT_DIR[i][0], col + STRAIGHT_DIR[i][1]);
+			if( tileToAdd != null)
+				areaToReturn.addTile( tileToAdd);
+		}
+		
+		return areaToReturn;
+	}
+	
+	public Area getNearTiles( Tile tile) {
+		
+		return getNearTiles( tile.row, tile.col);
+	}
+	
+	public Area getNearTiles( int row, int col) {
+		
+		Area areaToReturn = new Area();
+		
+		for( int i = 0; i < DIR.length; i++) {
+			
+			Tile tileToAdd = getTile( row + DIR[i][0], col + DIR[i][1]);
+			if( tileToAdd != null)
+				areaToReturn.addTile( tileToAdd);
+		}
+		
+		return areaToReturn;
+	}
+	
 	//TODO: Exceptions should be added.
 	@Override
 	public Iterator<Tile> iterator() {
@@ -113,7 +155,7 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	public Tile next() {
 		
 		current++;
-		return map[ current / cols][ current % cols];
+		return map[ ( current - 1) / cols][ ( current - 1) % cols];
 	}
 
 	@Override

@@ -13,43 +13,52 @@ public class Tile {
 	//A - Properties
 	private final int INCREMENT = 1;
 	
+	public int row;
+	public int col;
+	
 	protected int[] 		states;
 	protected int			noStates;
 	protected Properties 	info;
 	protected ArrayList<Placeable>		objects;
 	
 	//B - Constructors
-	public Tile() {
+	public Tile( int row, int col) {
 		
+		this.row = row;
+		this.col = col;
 		noStates = 0;
 		states = null;
 		info = null;
 	}
 	
-	public Tile( int state) {
+	public Tile( int row, int col, int state) {
 		
+		this.row = row;
+		this.col = col;
 		noStates = 1;
 		states = new int[1];
 		states[0] = state;
 		info = null;
 	}
 	
-	public Tile( int[] states) {
+	public Tile( int row, int col, int[] states) {
 		
+		this.row = row;
+		this.col = col;
 		noStates = states.length;
 		this.states = states;
 		info = null;
 	}
 	
-	public Tile( int state, Properties info) {
+	public Tile( int row, int col, int state, Properties info) {
 		
-		this( state);
+		this( row, col, state);
 		this.info = info;
 	}
 	
-	public Tile( int[] states, Properties prop) {
+	public Tile( int row, int col, int[] states, Properties prop) {
 		
-		this( states);
+		this( row, col, states);
 		this.info = prop;
 	}
 	
@@ -86,7 +95,6 @@ public class Tile {
 		if( noStates == 0) {
 			
 			states = new int[1];
-			noStates = 1;
 		}
 		
 		else {
@@ -101,7 +109,7 @@ public class Tile {
 				states[i] = temp[i];
 		}
 		
-		states[ noStates + 1] = state;
+		states[ noStates] = state;
 		noStates++;
 	}
 }

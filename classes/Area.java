@@ -35,7 +35,6 @@ public class Area implements Iterator<Tile>, Iterable<Tile> {
 		if( size == 0) {
 			
 			area = new Tile[1];
-			size = 1;
 		}
 		
 		else {
@@ -50,7 +49,7 @@ public class Area implements Iterator<Tile>, Iterable<Tile> {
 				area[i] = temp[i];
 		}
 		
-		area[ size + 1] = tile;
+		area[ size] = tile;
 		size++;
 	}
 	
