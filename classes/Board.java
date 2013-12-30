@@ -135,10 +135,10 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 		return areaToReturn;
 	}
 	
-	//TODO: Exceptions should be added.
 	@Override
 	public Iterator<Tile> iterator() {
 		
+		current = 0;
 		return this;
 	}
 

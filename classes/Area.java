@@ -70,6 +70,7 @@ public class Area implements Iterator<Tile>, Iterable<Tile> {
 	@Override
 	public Iterator<Tile> iterator() {
 		
+		current = 0;
 		return this;
 	}
 
