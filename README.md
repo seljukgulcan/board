@@ -35,12 +35,12 @@ Progress
  - Modifying the projects according to last step.
  - Documentation.
 
-Projects Using Board Package (Uses board package v1.0)
+Projects Using Board Package
 --------
 
   These are the projects created to show what can be done with Board package.
 
- - [Minesweeper](https://github.com/Shathra/mine-sweeper)
+ - [Minesweeper](https://github.com/Shathra/mine-sweeper) (Uses board package v1.0)
 
 License
 --------
