@@ -1,11 +1,17 @@
+package board;
+
 import java.util.ArrayList;
 import java.util.Properties;
 
 /**
  * Tile class represents a single piece in the board.
+ * Holds 3 type of data:
+ *  - States (int value to show state of the tile).
+ *  - Properties (String values).
+ *  - Placeable Objects (Any objects implementing Placeable interface).
  * 
- * @author Selçuk Gülcan
- * @version 1
+ * @author Selcuk Gulcan
+ * @version 2.0
  */
 
 public class Tile {

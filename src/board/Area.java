@@ -1,10 +1,12 @@
+package board;
+
 import java.util.Iterator;
 
 /**
  * Area class contains bunch of tile objects.
  * 
- * @author Selçuk Gülcan
- * @version 1
+ * @author Selcuk Gulcan
+ * @version 2.0
  */
 
 public class Area implements Iterator<Tile>, Iterable<Tile> {

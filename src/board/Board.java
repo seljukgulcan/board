@@ -1,32 +1,54 @@
+package board;
+
 import java.util.Iterator;
 
 /**
  * Board class for general use in board based games.
+ * For more information, visit Github page:
+ * https://github.com/Shathra/board
  * 
- * @author Selçuk Gülcan
- * @version 1
+ * @author Selcuk Gulcan
+ * @version 2.0
  */
 
 public class Board implements Iterator<Tile>, Iterable<Tile> {
 
-	//A - Properties
+	//A - Properties & Constants
 	private int current = 0; //For implementation of iterator.
 	
+	//Constants
+	public final static int QUADRATIC = 0;
+	public final static int HEXAGONAL = 1;
+	public final static int TRIANGULAR = 2;
+	
 	//Direction Arrays
-	public final static int[][] DIR = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
-	public final static int[] UP = DIR[1];
-	public final static int[] DOWN = DIR[6];
-	public final static int[] RIGHT = DIR[4];
-	public final static int[] LEFT = DIR[3];
-	public final static int[][] STRAIGHT_DIR = {DIR[1], DIR[4], DIR[6], DIR[3]};
+	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {-1, 0}, {0, 1}};
+	public final static int[][] DIR6_EVEN = {{-2,0}, {-1,1}, {1,1}, {2,0}, {1,0}, {-1,0}};
+	public final static int[][] DIR6_ODD = {{-2,0}, {-1,0}, {1,0}, {2,0}, {1,-1}, {-1,-1}};
+	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
 	protected int rows;
 	protected int cols;
 	protected Tile[][] map;
+	protected int type; //Type of grid: Quadratic, hexagonal or triangular.
 	
 	//B - Constructors
 	public Board( int rows, int cols) {
 		
+		//Default type is quadratic.
+		this( rows, cols, QUADRATIC);
+	}
+	
+	public Board( int rows, int cols, int type) {
+		
+		if( type < 0 || type > 3)
+			throw new RuntimeException( "Exception: Invalid type (01)");
+		
+		if( rows <= 0 || cols <= 0)
+			throw new RuntimeException( "Exception: Invalid number of rows or cols (02)");
+		
+		this.type = type;
 		this.rows = rows;
 		this.cols = cols;
 		map = new Tile[rows][cols];
@@ -105,10 +127,37 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	public Area getAdjacentTiles( int row, int col) {
 		
 		Area areaToReturn = new Area();
+		int[][] traverseArr = null;
 		
-		for( int i = 0; i < STRAIGHT_DIR.length; i++) {
+		switch( type){
 			
-			Tile tileToAdd = getTile( row + STRAIGHT_DIR[i][0], col + STRAIGHT_DIR[i][1]);
+			case( QUADRATIC):
+			
+				traverseArr = DIR4;
+				break;
+			
+			case( HEXAGONAL):
+				
+				if( row % 2 == 0)
+					traverseArr = DIR6_EVEN;
+			
+				else
+					traverseArr = DIR6_ODD;
+				break;
+			
+			case( TRIANGULAR):
+				
+				if( col % 2 == 0)
+					traverseArr = DIR3_EVEN;
+			
+				else
+					traverseArr = DIR3_ODD;
+				break;
+		}
+		
+		for( int i = 0; i < traverseArr.length; i++) {
+
+			Tile tileToAdd = getTile( row + traverseArr[i][0], col + traverseArr[i][1]);
 			if( tileToAdd != null)
 				areaToReturn.addTile( tileToAdd);
 		}
@@ -116,24 +165,6 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 		return areaToReturn;
 	}
 	
-	public Area getNearTiles( Tile tile) {
-		
-		return getNearTiles( tile.row, tile.col);
-	}
-	
-	public Area getNearTiles( int row, int col) {
-		
-		Area areaToReturn = new Area();
-		
-		for( int i = 0; i < DIR.length; i++) {
-			
-			Tile tileToAdd = getTile( row + DIR[i][0], col + DIR[i][1]);
-			if( tileToAdd != null)
-				areaToReturn.addTile( tileToAdd);
-		}
-		
-		return areaToReturn;
-	}
 	
 	@Override
 	public Iterator<Tile> iterator() {
