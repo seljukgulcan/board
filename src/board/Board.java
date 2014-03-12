@@ -22,7 +22,7 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	public final static int TRIANGULAR = 2;
 	
 	//Direction Arrays
-	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {-1, 0}, {0, 1}};
+	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR6_EVEN = {{-2,0}, {-1,1}, {1,1}, {2,0}, {1,0}, {-1,0}};
 	public final static int[][] DIR6_ODD = {{-2,0}, {-1,0}, {1,0}, {2,0}, {1,-1}, {-1,-1}};
 	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
@@ -31,24 +31,29 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	protected int rows;
 	protected int cols;
 	protected Tile[][] map;
-	protected int type; //Type of grid: Quadratic, hexagonal or triangular.
 	
-	//B - Constructors
-	public Board( int rows, int cols) {
+	//Static Methods
+	public static Board createQuadBoard( int rows, int cols) {
 		
-		//Default type is quadratic.
-		this( rows, cols, QUADRATIC);
+		return new BoardQuad( rows, cols);
 	}
 	
-	public Board( int rows, int cols, int type) {
+	public static Board createTriBoard( int rows, int cols) {
 		
-		if( type < 0 || type > 3)
-			throw new RuntimeException( "Exception: Invalid type (01)");
+		return new BoardTri( rows, cols);
+	}
+	
+	public static Board createHexBoard( int rows, int cols) {
+		
+		return new BoardHex( rows, cols);
+	}
+	
+	public Board( int rows, int cols) {
+		
 		
 		if( rows <= 0 || cols <= 0)
 			throw new RuntimeException( "Exception: Invalid number of rows or cols (02)");
 		
-		this.type = type;
 		this.rows = rows;
 		this.cols = cols;
 		map = new Tile[rows][cols];
@@ -109,6 +114,16 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	}
 	
 	//C.3 - Other Methods
+	public boolean isIn( Tile tile) {
+		
+		return isIn( tile.row, tile.col);
+	}
+	
+	public boolean isIn( int row, int col) {
+		
+		return row >= 0 && col >= 00 && row < this.rows && col < this.cols; 
+	}
+	
 	public void addState( Tile tile, int state) {
 		
 		tile.addState( state);
@@ -126,34 +141,11 @@ public class Board implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Area getAdjacentTiles( int row, int col) {
 		
+		if( !isIn(row, col))
+			throw new RuntimeException( "Exception: Invalid number of rows or cols (02)");
+			
 		Area areaToReturn = new Area();
-		int[][] traverseArr = null;
-		
-		switch( type){
-			
-			case( QUADRATIC):
-			
-				traverseArr = DIR4;
-				break;
-			
-			case( HEXAGONAL):
-				
-				if( row % 2 == 0)
-					traverseArr = DIR6_EVEN;
-			
-				else
-					traverseArr = DIR6_ODD;
-				break;
-			
-			case( TRIANGULAR):
-				
-				if( col % 2 == 0)
-					traverseArr = DIR3_EVEN;
-			
-				else
-					traverseArr = DIR3_ODD;
-				break;
-		}
+		int[][] traverseArr = DIR4;
 		
 		for( int i = 0; i < traverseArr.length; i++) {
 

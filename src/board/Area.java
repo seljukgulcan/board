@@ -97,4 +97,15 @@ public class Area implements Iterator<Tile>, Iterable<Tile> {
 		
 		removeTile( current);
 	}
+	
+	public void showTiles() {
+		
+		//TODO: This is just a test function
+		Iterator<Tile> it = iterator();
+		System.out.println( size);
+		while( it.hasNext()) {
+			Tile temp = it.next();
+			System.out.println( temp.row + ", " + temp.col);
+		}
+	}
 }
