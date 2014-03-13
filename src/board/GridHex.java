@@ -1,13 +1,13 @@
 package board;
 
-public class BoardHex extends Board {
+public class GridHex extends Grid {
 
 	//Properties
 	public final static int[][] DIRECTION_ODD = {{-2,0}, {-1,1}, {1,1}, {2,0}, {1,0}, {-1,0}};
 	public final static int[][] DIRECTION_EVEN = {{-2,0}, {-1,0}, {1,0}, {2,0}, {1,-1}, {-1,-1}};
 	
 	//Constructors
-	public BoardHex( int row, int col) {
+	public GridHex( int row, int col) {
 		
 		super( row, col);
 	}

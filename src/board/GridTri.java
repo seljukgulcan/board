@@ -1,18 +1,18 @@
 package board;
 
-public class BoardQuad extends Board {
+public class GridTri extends Grid {
 
 	//Properties
-	public final static int[][] DIRECTION = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIRECTION_EVEN = {{0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIRECTION_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
 	//Constructors
-	public BoardQuad( int row, int col) {
+	public GridTri( int row, int col) {
 		
 		super( row, col);
 	}
 	
 	//Methods
-	/*
 	@Override
 	public Area getAdjacentTiles( int row, int col) {
 		
@@ -20,7 +20,13 @@ public class BoardQuad extends Board {
 			throw new RuntimeException( "Exception: Invalid number of rows or cols (02)");
 		
 		Area areaToReturn = new Area();
-		int[][] traverseArr = DIRECTION;
+		int[][] traverseArr = null;
+		
+		if( col % 2 == 0)
+			traverseArr = DIRECTION_EVEN;
+	
+		else
+			traverseArr = DIRECTION_ODD;
 		
 		for( int i = 0; i < traverseArr.length; i++) {
 
@@ -31,5 +37,4 @@ public class BoardQuad extends Board {
 		
 		return areaToReturn;
 	}
-	*/
 }
