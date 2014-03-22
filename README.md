@@ -12,17 +12,19 @@ This package contains these files :
  - Board.java
  - Tile.java
  - Area.java
- - Placeable.java
+ - Grid.java
+ - GridQuad.java
+ - GridHex.java
+ - GridTri.java
  
 Feaures
 --------
 
  - Implements square based grids as 2D array.
  - Every piece in the grid is considered as a Tile object.
- - Tile objects hold 3 main data:
+ - Tile objects hold 2 main data:
   - States: integer information about the states of the tile.
-  - Properties: string information.
-  - Placeable objects: Any object implements Placeable interface.
+  - Objects
 
 Progress
 --------
