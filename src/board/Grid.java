@@ -9,26 +9,23 @@ import java.util.Iterator;
  * @author Selcuk Gulcan
  */
 
-public class Grid implements Iterator<Tile>, Iterable<Tile> {
+public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 
 	//A - Properties & Constants
 	private int current = 0; //For implementation of iterator.
 	
 	//Constants
-	public final static int QUADRATIC = 0;
-	public final static int HEXAGONAL = 1;
-	public final static int TRIANGULAR = 2;
 	
 	//Direction Arrays
 	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR6_EVEN = {{-2,0}, {-1,1}, {1,1}, {2,0}, {1,0}, {-1,0}};
-	public final static int[][] DIR6_ODD = {{-2,0}, {-1,0}, {1,0}, {2,0}, {1,-1}, {-1,-1}};
+	public final static int[][] DIR6 = {{-1,1}, {0,1}, {1,0}, {1,-1}, {0,-1}, {-1,0}};
 	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
-	protected int rows;
-	protected int cols;
-	protected Tile[][] map;
+	protected int[][] 	direction;
+	protected int 		rows;
+	protected int 		cols;
+	protected Tile[][] 	map;
 	
 	//Static Methods
 	
@@ -71,9 +68,19 @@ public class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return tile.getState( index);
 	}
 	
+	public int getState( Tile tile, String name) {
+		
+		return tile.getState( name);
+	}
+	
 	public int getState( int row, int col, int index) {
 		
 		return getTile( row, col).getState( index);
+	}
+	
+	public int getState( int row, int col, String name) {
+		
+		return getTile( row, col).getState( name);
 	}
 	
 	public int[] getAllStates( Tile tile) {
@@ -92,9 +99,19 @@ public class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return tile.setState( index, state);
 	}
 	
+	public boolean setState( Tile tile, String name, int state) {
+		
+		return tile.setState( name, state);
+	}
+	
 	public boolean setState( int row, int col, int index, int state) {
 		
 		return getTile( row, col).setState( index, state);
+	}
+	
+	public boolean setState( int row, int col, String name, int state) {
+		
+		return getTile( row, col).setState( name, state);
 	}
 	
 	//C.3 - Other Methods
@@ -113,9 +130,19 @@ public class Grid implements Iterator<Tile>, Iterable<Tile> {
 		tile.addState( state);
 	}
 	
+	public void addState( Tile tile, String name, int state ) {
+		
+		setState( tile, name, state);
+	}
+	
 	public void addState( int row, int col, int state) {
 		
 		getTile( row, col).addState( state);
+	}
+	
+	public void addState( int row, int col, String name, int state) {
+		
+		setState( row, col, name, state);
 	}
 	
 	public Area getAdjacentTiles( Tile tile) {
@@ -129,11 +156,10 @@ public class Grid implements Iterator<Tile>, Iterable<Tile> {
 			throw new RuntimeException( "Exception: Invalid number of rows or cols (02)");
 			
 		Area areaToReturn = new Area();
-		int[][] traverseArr = DIR4;
 		
-		for( int i = 0; i < traverseArr.length; i++) {
+		for( int i = 0; i < direction.length; i++) {
 
-			Tile tileToAdd = getTile( row + traverseArr[i][0], col + traverseArr[i][1]);
+			Tile tileToAdd = getTile( row + direction[i][0], col + direction[i][1]);
 			if( tileToAdd != null)
 				areaToReturn.addTile( tileToAdd);
 		}
@@ -141,7 +167,7 @@ public class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return areaToReturn;
 	}
 	
-	
+	//Iterator methods
 	@Override
 	public Iterator<Tile> iterator() {
 		

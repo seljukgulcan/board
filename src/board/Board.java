@@ -12,11 +12,9 @@ package board;
 public class Board {
 	
 	//Constants
-	public final static int QUADRATIC = 0;
-	public final static int HEXAGONAL = 1;
-	public final static int TRIANGULAR = 2;
 	
 	//Direction Arrays
+	//TODO: Check direction arrays
 	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR6_EVEN = {{-2,0}, {-1,1}, {1,1}, {2,0}, {1,0}, {-1,0}};
 	public final static int[][] DIR6_ODD = {{-2,0}, {-1,0}, {1,0}, {2,0}, {1,-1}, {-1,-1}};
