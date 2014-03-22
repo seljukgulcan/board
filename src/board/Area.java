@@ -67,8 +67,42 @@ public class Area implements Iterator<Tile>, Iterable<Tile> {
 		
 		return true;
 	}
+	
+	public Area getRandomTile() {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRandomTiles() {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRandomTiles( int number) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area find( String key, int state) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area find( String key, Object object) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public void setState( String key, int state) {
+		
+		//TODO: Fill the method
+	}
 
-	//TODO: Exceptions should be added.
 	@Override
 	public Iterator<Tile> iterator() {
 		

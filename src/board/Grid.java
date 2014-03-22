@@ -19,8 +19,8 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	//Direction Arrays
 	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR6 = {{-1,1}, {0,1}, {1,0}, {1,-1}, {0,-1}, {-1,0}};
-	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
+	/*public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};*/
 	
 	protected int[][] 	direction;
 	protected int 		rows;
@@ -63,24 +63,20 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return null;
 	}
 	
-	public int getState( Tile tile, int index) {
+	public Tile getTile( Tile base, int[] direction) {
 		
-		return tile.getState( index);
+		//TODO: Fill the method
+		return null;
 	}
 	
-	public int getState( Tile tile, String name) {
+	public int getState( Tile tile, String key) {
 		
-		return tile.getState( name);
+		return tile.getState( key);
 	}
 	
-	public int getState( int row, int col, int index) {
+	public int getState( int row, int col, String key) {
 		
-		return getTile( row, col).getState( index);
-	}
-	
-	public int getState( int row, int col, String name) {
-		
-		return getTile( row, col).getState( name);
+		return getTile( row, col).getState( key);
 	}
 	
 	public int[] getAllStates( Tile tile) {
@@ -93,25 +89,45 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return getTile( row, col).getAllStates();
 	}
 	
+	public Object get( Tile tile, String key) {
+		
+		return tile.get(key);
+	}
+	
+	public Object get( int row, int col, String key) {
+		
+		return getTile( row, col).get( key);
+	}
+	
 	//C.2 - Set Methods
-	public boolean setState( Tile tile, int index, int state) {
+	public void setState( String key, int state) {
 		
-		return tile.setState( index, state);
+		//TODO: Fill the method
 	}
 	
-	public boolean setState( Tile tile, String name, int state) {
+	public void set( String key, Object object) {
 		
-		return tile.setState( name, state);
+		//TODO: Fill the method
 	}
 	
-	public boolean setState( int row, int col, int index, int state) {
+	public void setState( Tile tile, String name, int state) {
 		
-		return getTile( row, col).setState( index, state);
+		tile.setState( name, state);
 	}
 	
-	public boolean setState( int row, int col, String name, int state) {
+	public void setState( int row, int col, String key, int state) {
 		
-		return getTile( row, col).setState( name, state);
+		getTile( row, col).setState( key, state);
+	}
+	
+	public void set( Tile tile, String key, Object object) {
+		
+		tile.set(key, object);
+	}
+	
+	public void set( int row, int col, String key, Object object) {
+		
+		getTile(row, col).set(key, object);
 	}
 	
 	//C.3 - Other Methods
@@ -125,19 +141,9 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return row >= 0 && col >= 00 && row < this.rows && col < this.cols; 
 	}
 	
-	public void addState( Tile tile, int state) {
-		
-		tile.addState( state);
-	}
-	
 	public void addState( Tile tile, String name, int state ) {
 		
 		setState( tile, name, state);
-	}
-	
-	public void addState( int row, int col, int state) {
-		
-		getTile( row, col).addState( state);
 	}
 	
 	public void addState( int row, int col, String name, int state) {
@@ -165,6 +171,84 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		}
 		
 		return areaToReturn;
+	}
+	
+	public Area getRange( Tile center, int radius) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRange( int row, int col, int radius) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRange( Tile center, int radiusStart, int radiusEnd) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRange( int row, int col, int radiusStart, int radiusEnd) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getLine( Tile base, int length) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getLine( int row, int col, int length) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getLine( Tile base, int startPoint, int endPoint) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getLine( int row, int col, int startPoint, int endPoint) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Tile getRandomTile() {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRandomTiles() {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area getRandomTiles( int number) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area find( String key, int state) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public Area find( String key, Object object) {
+		
+		//TODO: Fill the method
+		return null;
 	}
 	
 	//Iterator methods

@@ -1,7 +1,6 @@
 package board;
 
-import java.util.ArrayList;
-import java.util.Properties;
+import java.util.Hashtable;
 
 /**
  * Tile class represents a single piece in the board.
@@ -17,105 +16,89 @@ import java.util.Properties;
 public class Tile {
 
 	//A - Properties
-	private final int INCREMENT = 1;
 	
 	public int row;
 	public int col;
 	
-	protected int[] 		states;
-	protected int			noStates;
-	protected Properties 	info;
-	protected ArrayList<Placeable>		objects;
+	protected Hashtable<String, Integer>	states;
+	protected Hashtable<String, Object>		objects;
 	
 	//B - Constructors
 	public Tile( int row, int col) {
 		
 		this.row = row;
 		this.col = col;
-		noStates = 0;
 		states = null;
-		info = null;
+		objects = null;
 	}
 	
-	public Tile( int row, int col, int state) {
+	public Tile( int row, int col, String key, int initialState) {
 		
 		this.row = row;
 		this.col = col;
-		noStates = 1;
-		states = new int[1];
-		states[0] = state;
-		info = null;
-	}
-	
-	public Tile( int row, int col, int[] states) {
-		
-		this.row = row;
-		this.col = col;
-		noStates = states.length;
-		this.states = states;
-		info = null;
-	}
-	
-	public Tile( int row, int col, int state, Properties info) {
-		
-		this( row, col, state);
-		this.info = info;
-	}
-	
-	public Tile( int row, int col, int[] states, Properties prop) {
-		
-		this( row, col, states);
-		this.info = prop;
+		states = new Hashtable<String, Integer>( 5);
+		states.put(key, initialState);
+		objects = null;
 	}
 	
 	//C - Methods
 	//C.1 - Get Methods
-	public int getState( int index) {
+	public int getState( String key) {
 		
-		return states[index];
+		if( states == null)
+			throw new NullPointerException();
+		
+		if( states.get(key) == null)
+			throw new NullPointerException();
+		
+		return states.get(key);
 	}
 	
 	public int[] getAllStates() {
 		
-		return states;
+		//TODO: Fill the method
+		return null;
 	}
+	
+	public Object get( String key) {
+		
+		if( objects == null)
+			return null;
+		
+		return objects.get( key);
+	}
+	
 	
 	public int noStates() {
 		
-		return noStates;
+		if( states == null)
+			return 0;
+		
+		return states.size();
+	}
+	
+	public int noObjects() {
+		
+		if( objects == null)
+			return 0;
+		
+		return objects.size();
 	}
 	
 	//C.2 - Set Methods
-	public boolean setState( int index, int state) {
+	public void setState( String key, int state) {
 		
-		if( index < 0 || index >= noStates)
-			return false;
+		if( states == null)
+			states = new Hashtable<String, Integer>( 5);
 		
-		states[ index] = state;
-		return true;
+		states.put(key, state);
 	}
 	
-	//C.2 - Other Methods
-	public void addState( int state) {
+	public void set( String key, Object object) {
 		
-		if( noStates == 0) {
-			
-			states = new int[1];
-		}
+		if( objects == null)
+			objects = new Hashtable<String, Object>( 5);
 		
-		else {
-			
-			int[] temp = new int[ noStates];
-			for( int i = 0; i < noStates; i++)
-				temp[i] = states[i];
-			
-			states = new int[ noStates + INCREMENT];
-			
-			for( int i = 0; i < noStates; i++)
-				states[i] = temp[i];
-		}
-		
-		states[ noStates] = state;
-		noStates++;
+		objects.put(key, object);
 	}
 }
