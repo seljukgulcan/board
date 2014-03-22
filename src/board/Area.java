@@ -1,5 +1,6 @@
 package board;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -9,134 +10,127 @@ import java.util.Iterator;
  * @version 2.0
  */
 
-public class Area implements Iterator<Tile>, Iterable<Tile> {
+public class Area implements Iterable<Tile> {
 
 	//A - Properties
-	private final int INCREMENT = 1;
-	private int current = 0; //For implementation of iterator.
-	
-	protected Tile[] area;
-	protected int size;
+	protected ArrayList<Tile> area;
 	
 	//B - Constructors
 	public Area() {
 		
-		area = null;
-		size = 0;
+		area = new ArrayList<Tile>();
 	}
 	
 	public Area( Area other) {
 		
-		//TODO complete method.
-		this();
+		area = new ArrayList<Tile>();
+		
+		Iterator<Tile> it = other.iterator();
+		while( it.hasNext())
+			area.add( it.next());
 	}
 	
 	//C - Methods
 	public void addTile( Tile tile) {
 		
-		if( size == 0) {
-			
-			area = new Tile[1];
-		}
-		
-		else {
-			
-			Tile[] temp = new Tile[ size];
-			for( int i = 0; i < size; i++)
-				temp[i] = area[i];
-			
-			area = new Tile[ size + INCREMENT];
-			
-			for( int i = 0; i < size; i++)
-				area[i] = temp[i];
-		}
-		
-		area[ size] = tile;
-		size++;
+		area.add( tile);
 	}
 	
-	public boolean removeTile( int index) {
+	public void removeTile( int index) {
 		
-		//NOTE: Array size is not modified.
-		
-		if( index < 0 || index >= size)
-			return false;
-		
-		for( int i = index; i < size - 1; i++)
-			area[i] = area[ i + 1];
-		
-		return true;
+		area.remove(index);
 	}
 	
-	public Area getRandomTile() {
+	public int size() {
 		
-		//TODO: Fill the method
-		return null;
+		if( area != null)
+			return area.size();
+		
+		return 0;
+	}
+	
+	public Tile getRandomTile() {
+		
+		int r = (int)( Math.random() * area.size());
+		return area.get( r);
 	}
 	
 	public Area getRandomTiles() {
 		
-		//TODO: Fill the method
-		return null;
+		return getRandomTiles( ((int)Math.random() * area.size()) + 1);
 	}
 	
 	public Area getRandomTiles( int number) {
 		
-		//TODO: Fill the method
-		return null;
+		int n = size();
+		if( number > n)
+			throw new RuntimeException( "number of random numbers is greater than total number of tiles.");
+		
+		int[] arr = new int[ n];
+		int r;
+		Area areaToReturn = new Area();
+		
+		for( int i = 0; i < n; i++)
+			arr[i] = i;
+		for( int i = 0; i < number; i++) {
+			
+			r = (int)(Math.random() * n);
+			areaToReturn.addTile( getTile( arr[r]));
+			arr[r] = arr[ n - 1];
+			n--;
+		}
+		return areaToReturn;
 	}
 	
+	public Tile getTile(int index) {
+		
+		return area.get(index);
+	}
+
 	public Area find( String key, int state) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		Iterator<Tile> it = iterator();
+		while( it.hasNext()) {
+			
+			Tile tile = it.next();
+			if( tile.getState(key) == state)
+				areaToReturn.addTile(tile);
+		}
+		return areaToReturn;
 	}
 	
 	public Area find( String key, Object object) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		Iterator<Tile> it = iterator();
+		while( it.hasNext()) {
+			
+			Tile tile = it.next();
+			if( tile.get(key) == object)
+				areaToReturn.addTile(tile);
+		}
+		return areaToReturn;
 	}
 	
 	public void setState( String key, int state) {
 		
-		//TODO: Fill the method
+		Iterator<Tile> it = iterator();
+		while( it.hasNext())
+			it.next().setState(key, state);
 	}
 
 	@Override
 	public Iterator<Tile> iterator() {
 		
-		current = 0;
-		return this;
+		return area.iterator();
 	}
 
-	@Override
-	public boolean hasNext() {
-		
-		if( current < size)
-			return true;
-		
-		return false;
-	}
-
-	@Override
-	public Tile next() {
-		
-		current++;
-		return area[ current - 1];
-	}
-
-	@Override
-	public void remove() {
-		
-		removeTile( current);
-	}
-	
 	public void showTiles() {
 		
 		//TODO: This is just a test function
 		Iterator<Tile> it = iterator();
-		System.out.println( size);
+		System.out.println( area.size());
 		while( it.hasNext()) {
 			Tile temp = it.next();
 			System.out.println( temp.row + ", " + temp.col);

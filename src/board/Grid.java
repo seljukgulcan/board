@@ -19,8 +19,8 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	//Direction Arrays
 	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR6 = {{-1,1}, {0,1}, {1,0}, {1,-1}, {0,-1}, {-1,0}};
-	/*public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};*/
+	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
 	protected int[][] 	direction;
 	protected int 		rows;
@@ -65,8 +65,7 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Tile getTile( Tile base, int[] direction) {
 		
-		//TODO: Fill the method
-		return null;
+		return getTile( base.row + direction[0], base.col + direction[1]);
 	}
 	
 	public int getState( Tile tile, String key) {
@@ -102,12 +101,16 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	//C.2 - Set Methods
 	public void setState( String key, int state) {
 		
-		//TODO: Fill the method
+		Iterator<Tile> it = iterator();
+		while( it.hasNext())
+			it.next().setState(key, state);
 	}
 	
 	public void set( String key, Object object) {
 		
-		//TODO: Fill the method
+		Iterator<Tile> it = iterator();
+		while( it.hasNext())
+			it.next().set(key, object);
 	}
 	
 	public void setState( Tile tile, String name, int state) {
@@ -223,32 +226,64 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Tile getRandomTile() {
 		
-		//TODO: Fill the method
-		return null;
+		int rand = (int) (Math.random() * rows * cols);
+		return getTile( rand / cols, rand & cols);
 	}
 	
 	public Area getRandomTiles() {
 		
-		//TODO: Fill the method
-		return null;
+		return getRandomTiles( ((int)Math.random() * rows * cols) + 1);
 	}
 	
 	public Area getRandomTiles( int number) {
+		int n = rows * cols;
+		if( number > n)
+			throw new RuntimeException( "number of random numbers is greater than total number of tiles.");
 		
-		//TODO: Fill the method
-		return null;
+		int[] arr = new int[ n];
+		int r;
+		Area areaToReturn = new Area();
+		
+		for( int i = 0; i < n; i++)
+			arr[i] = i;
+		
+		for( int i = 0; i < number; i++) {
+			
+			r = (int)(Math.random() * n);
+			areaToReturn.addTile( getTile( arr[r] / cols, arr[r] % cols));
+			arr[r] = arr[ n - 1];
+			n--;
+		}
+		
+		return areaToReturn;
 	}
 	
 	public Area find( String key, int state) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		Iterator<Tile> it = iterator();
+		while( it.hasNext()) {
+			
+			Tile tile = it.next();
+			if( tile.getState( key) == state)
+				areaToReturn.addTile( tile);
+		}
+		
+		return areaToReturn;
 	}
 	
 	public Area find( String key, Object object) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		Iterator<Tile> it = iterator();
+		while( it.hasNext()) {
+			
+			Tile tile = it.next();
+			if( tile.get( key) == object)
+				areaToReturn.addTile( tile);
+		}
+		
+		return areaToReturn;
 	}
 	
 	//Iterator methods

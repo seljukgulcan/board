@@ -4,10 +4,9 @@ import java.util.Hashtable;
 
 /**
  * Tile class represents a single piece in the board.
- * Holds 3 type of data:
+ * Holds 2 type of data:
  *  - States (int value to show state of the tile).
- *  - Properties (String values).
- *  - Placeable Objects (Any objects implementing Placeable interface).
+ *  - Objects (Any object).
  * 
  * @author Selcuk Gulcan
  * @version 2.0
