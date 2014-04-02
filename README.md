@@ -20,7 +20,7 @@ This package contains these files :
 Feaures
 --------
 
- - Implements square based grids as 2D array.
+ - Implements quadratic, triangular and hexagonal grids as 2D array.
  - Every piece in the grid is considered as a Tile object.
  - Tile objects hold 2 main data:
   - States: integer information about the states of the tile.
@@ -30,7 +30,7 @@ Progress
 --------
 
  - Github repository and wiki for a development platform. (OK)
- - UML class diagram. (Need changes)
+ - UML class diagram. (OK)
  - Coding java classes according to UML diagram. (In progress)
  - Testing and debugging.
  - Creating some board games to test this package.
