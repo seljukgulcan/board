@@ -9,7 +9,7 @@ package board;
  * @version 2.0
  */
 
-public class Board {
+public abstract class Board {
 	
 	//Constants
 	
