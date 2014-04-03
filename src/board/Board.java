@@ -36,4 +36,22 @@ public abstract class Board {
 		
 		return new GridHex( rows, cols);
 	}
+	
+	public static Grid createBasicGridQuad( int rows, int cols) {
+		
+		//TODO: Fill the method
+		return null;
+	}
+	
+	public static Grid createBasicGridTri( int rows, int cols) {
+			
+			//TODO: Fill the method
+			return null;
+		}
+	
+	public static Grid createBasicGridHex( int rows, int cols) {
+		
+		//TODO: Fill the method
+		return null;
+	}
 }
