@@ -1,6 +1,7 @@
 package board;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 /**
  * Tile class represents a single piece in the board.
@@ -55,8 +56,12 @@ public class Tile {
 	
 	public int[] getAllStates() {
 		
-		//TODO: Fill the method
-		return null;
+		int[] arr = new int[states.size()];
+		Iterator<Integer> it = states.values().iterator();
+		for( int i = 0; it.hasNext(); i++)
+			arr[i] = it.next();
+		
+		return arr;
 	}
 	
 	public Object get( String key) {

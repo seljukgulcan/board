@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  * Grid parent class
- * TODO: Add description
+ * Contains shared methods used by sub grid classes.
  * 
  * @author Selcuk Gulcan
  */
@@ -184,8 +184,7 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Area getRange( int row, int col, int radius) {
 		
-		//TODO: Fill the method
-		return null;
+		return getRange( getTile( row, col), radius);
 	}
 	
 	public Area getRange( Tile center, int radiusStart, int radiusEnd) {
@@ -196,32 +195,39 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Area getRange( int row, int col, int radiusStart, int radiusEnd) {
 		
-		//TODO: Fill the method
-		return null;
+		return getRange( getTile(row, col), radiusStart, radiusEnd);
 	}
 	
-	public Area getLine( Tile base, int length) {
+	public Area getLine( Tile base, int[] direction, int length) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		int row = base.row;
+		int col = base.row;
+		for( int i = 0; i < length; i++)
+			areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+		
+		return areaToReturn;
 	}
 	
-	public Area getLine( int row, int col, int length) {
+	public Area getLine( int row, int col, int[] direction, int length) {
 		
-		//TODO: Fill the method
-		return null;
+		return getLine( getTile( row, col), direction, length);
 	}
 	
-	public Area getLine( Tile base, int startPoint, int endPoint) {
+	public Area getLine( Tile base, int[] direction, int startPoint, int endPoint) {
 		
-		//TODO: Fill the method
-		return null;
+		Area areaToReturn = new Area();
+		int row = base.row;
+		int col = base.row;
+		for( int i = startPoint; i < endPoint; i++)
+			areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+		
+		return areaToReturn;
 	}
 	
-	public Area getLine( int row, int col, int startPoint, int endPoint) {
+	public Area getLine( int row, int col, int[] direction, int startPoint, int endPoint) {
 		
-		//TODO: Fill the method
-		return null;
+		return getLine( getTile( row, col), direction, startPoint, endPoint);
 	}
 	
 	public Tile getRandomTile() {

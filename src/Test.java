@@ -1,23 +1,54 @@
-import java.util.Hashtable;
+import board.*;
 
 public class Test {
 
 	public static void main( String args[]) {
 		
-		int[] arr2 = new int[100];
-		Hashtable<String, Object>[] arr = new Hashtable[10000];
-		for( int i = 0; i < 10000; i++)
-			arr[i] = new Hashtable<String, Object>();
-		for( int i = 0; i < 10000; i++) {
-			
-			for( int j = 0; j < 100; j++) {
-				
-				arr[i].put( "j", j);
-			}
-		}
+		Grid board = new GridHex( 8, 8);
+		printGridHex(board);
+		System.out.println();
 		
-		System.out.println( int(2.2));
-		System.out.println( (Integer)arr[999].get( "j") == 3 ? "true" : "false");
-		System.out.println( (Integer)arr[999].get( "j2"));
+		board.getAdjacentTiles( 4, 4).showTiles();
+		
+		Grid board2 = new GridQuad( 8, 8);
+		printGridQuad(board2);
+		
+		System.out.println();
+		board2.getAdjacentTiles( 4, 4).showTiles();
+	}
+	
+	public static void printGridHex( Grid board) {
+		
+		String gap = "   ";
+		
+		for( int i = 0; i < board.getRows(); i++) {
+			
+			for( int j = 0; j < board.getCols(); j++) {
+				
+				System.out.print( board.getTile( i, j).row + "," + 
+						board.getTile( i, j).col + gap);
+			}
+			System.out.println( "\n");
+			printTimes( gap, i+ 1);
+		}
+	}
+	
+	public static void printGridQuad( Grid board) {
+		
+		for( int i = 0; i < board.getRows(); i++) {
+			
+			for( int j = 0; j < board.getCols(); j++) {
+				
+				System.out.print( board.getTile( i, j).row + "," + 
+						board.getTile( i, j).col + "\t");
+			}
+			System.out.println( "\n");
+		}
+	}
+	
+	public static void printTimes( String value, int times) {
+		
+		for( int i = 0; i < times; i++)
+			System.out.print( value);
 	}
 }

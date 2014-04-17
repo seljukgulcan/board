@@ -133,7 +133,8 @@ public class Area implements Iterable<Tile> {
 		System.out.println( area.size());
 		while( it.hasNext()) {
 			Tile temp = it.next();
-			System.out.println( temp.row + ", " + temp.col);
+			System.out.print( temp.row + "," + temp.col + "\t");
 		}
+		System.out.println();
 	}
 }
