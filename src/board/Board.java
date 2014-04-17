@@ -15,7 +15,7 @@ public abstract class Board {
 	
 	//Direction Arrays
 	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR6 = {{-1,1}, {0,1}, {1,0}, {1,-1}, {0,-1}, {-1,0}};
+	public final static int[][] DIR6 = {{-1, 0}, {-1, 1}, {0, 1}, {1, 0}, {1, -1}, {0, -1}};
 	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
 	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
@@ -35,7 +35,7 @@ public abstract class Board {
 		return new GridHex( rows, cols);
 	}
 	
-	public static Grid createBasicGridQuad( int rows, int cols) {
+	/*public static Grid createBasicGridQuad( int rows, int cols) {
 		
 		//TODO: Fill the method
 		return null;
@@ -51,5 +51,5 @@ public abstract class Board {
 		
 		//TODO: Fill the method
 		return null;
-	}
+	}*/
 }

@@ -6,15 +6,29 @@ public class Test {
 		
 		Grid board = new GridHex( 8, 8);
 		printGridHex(board);
-		System.out.println();
 		
+		System.out.println();
+		System.out.println( "board.getAdjacentTiles( 4, 4)");
 		board.getAdjacentTiles( 4, 4).showTiles();
+		
+		System.out.println();
+		System.out.println( "board.getLine( 4, 4, Board.DIR6[4], 3)");
+		board.getLine( 4, 4, Board.DIR6[4], 3).showTiles();
+		
+		System.out.println();
+		System.out.println( "board.getRange( 4, 4, 3).showTiles()");
+		board.getRange( 4, 4, 3).showTiles();
 		
 		Grid board2 = new GridQuad( 8, 8);
 		printGridQuad(board2);
 		
 		System.out.println();
+		System.out.println( "board2.getAdjacentTiles( 4, 4)");
 		board2.getAdjacentTiles( 4, 4).showTiles();
+		
+		System.out.println();
+		System.out.println( "board2.getLine( 4, 4, Board.DIR4[0], 3)");
+		board.getLine( 4, 4, Board.DIR4[0], 3).showTiles();
 	}
 	
 	public static void printGridHex( Grid board) {

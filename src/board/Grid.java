@@ -178,8 +178,30 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Area getRange( Tile center, int radius) {
 		
-		//TODO: Fill the method
-		return null;
+		Tile tileOnLine;
+		int rowOnLine, colOnLine;
+		int row = center.row;
+		int col = center.col;
+		Area area = new Area();
+		area.addTile( center);
+		for( int i = 0; i < direction.length; i++) {
+			
+			for( int j = 1; j < radius; j++) {
+				
+				tileOnLine = getTile( row + j * direction[i][0], col + j * direction[i][1]);
+				area.addTile( tileOnLine);
+				rowOnLine = tileOnLine.row;
+				colOnLine = tileOnLine.col;
+				
+				for( int k = 1; k < j; k++) {
+					
+					area.addTile( getTile( rowOnLine + k * direction[ ( i + 2) % direction.length][0],
+								  		   colOnLine + k * direction[ ( i + 2) % direction.length][1]));
+				}
+			}
+		}
+		
+		return area;
 	}
 	
 	public Area getRange( int row, int col, int radius) {
@@ -189,8 +211,32 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	
 	public Area getRange( Tile center, int radiusStart, int radiusEnd) {
 		
-		//TODO: Fill the method
-		return null;
+		if( radiusStart == 0)
+			return getRange( center, radiusEnd + 1);
+		
+		Tile tileOnLine;
+		int rowOnLine, colOnLine;
+		int row = center.row;
+		int col = center.col;
+		Area area = new Area();
+		for( int i = 0; i < direction.length; i++) {
+			
+			for( int j = radiusStart; j < radiusEnd; j++) {
+				
+				tileOnLine = getTile( row + j * direction[i][0], col + j * direction[i][1]);
+				area.addTile( tileOnLine);
+				rowOnLine = tileOnLine.row;
+				colOnLine = tileOnLine.col;
+				
+				for( int k = 1; k < j; k++) {
+					
+					area.addTile( getTile( rowOnLine + k * direction[ ( i + 2) % direction.length][0],
+								  		   colOnLine + k * direction[ ( i + 2) % direction.length][1]));
+				}
+			}
+		}
+		
+		return area;
 	}
 	
 	public Area getRange( int row, int col, int radiusStart, int radiusEnd) {
