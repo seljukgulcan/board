@@ -60,7 +60,7 @@ namespace Board
 				throw new ArgumentNullException ();
 				//throw new NullPointerException();
 
-			return states[key];
+			return (int)states[key];
 			//return states.get(key);
 		}
 
@@ -69,7 +69,7 @@ namespace Board
 			int[] arr = new int[states.Count];
 			//int[] arr = new int[states.size()];
 			IEnumerator<int> it;
-			it = states.Values.GetEnumerator();
+			it = (IEnumerator<int>)states.Values.GetEnumerator();
 			//Iterator<Integer> it = states.values().iterator();
 			for( int i = 0; it.MoveNext(); i++)
 			//for( int i = 0; it.hasNext(); i++)

@@ -6,9 +6,8 @@
  */
 
 using System;
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Generic.List;
 
 namespace Board
 {
@@ -76,7 +75,6 @@ namespace Board
 			Random rng = new Random ();
 
 			int n = size();
-			//TODO: Exception should be translated into c-sharp
 			if (number > n)
 				throw new ArgumentException ( "number of random numbers is greater than total number of tiles.");
 				//throw new RuntimeException( "number of random numbers is greater than total number of tiles.");
@@ -150,11 +148,21 @@ namespace Board
 		}
 		
 		//@Override
-		public IEnumerator<Tile> GetEnumerator() {
+		/*public IEnumerator<Tile> GetEnumerator() {
 		//public Iterator<Tile> iterator() {
 			
 			return area.GetEnumerator();
 			//return area.iterator();
+		}*/
+
+		public IEnumerator<Tile> GetEnumerator()
+		{
+			return area.GetEnumerator();
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
 		}
 		
 		public void showTiles() {

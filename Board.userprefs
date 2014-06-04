@@ -1,0 +1,19 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Board\Main.cs">
+    <Files>
+      <File FileName="Board\Area.cs" Line="163" Column="1" />
+      <File FileName="c:\Users\Shathra\Desktop\dropbox\home\board-class-c-sharp\Board\Board\Grid.cs" Line="335" Column="37" />
+      <File FileName="Board\Board.cs" Line="19" Column="1" />
+      <File FileName="c:\Users\Shathra\Desktop\dropbox\home\board-class-c-sharp\Board\Board\GridTri.cs" Line="18" Column="3" />
+      <File FileName="c:\Users\Shathra\Desktop\dropbox\home\board-class-c-sharp\Board\Board\Tile.cs" Line="72" Column="26" />
+      <File FileName="c:\Users\Shathra\Desktop\dropbox\home\board-class-c-sharp\Board\Board\GridQuad.cs" Line="13" Column="3" />
+      <File FileName="c:\Users\Shathra\Desktop\dropbox\home\board-class-c-sharp\Board\Board\GridHex.cs" Line="15" Column="3" />
+      <File FileName="Board\Main.cs" Line="32" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
