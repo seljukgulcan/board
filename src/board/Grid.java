@@ -258,14 +258,13 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return getLine( getTile( row, col), direction);
 	}
 	
+	
 	public Area getLine( Tile base, int[] direction, int length) {
 		
 		Area areaToReturn = new Area();
-		int row = base.row;
-		int col = base.row;
 		for( int i = 0; i < length; i++) {
 			
-			Tile tileToAdd = getTile( row + i * direction[0], col + i * direction[1]);
+			Tile tileToAdd = getTile( base.row + i * direction[0], base.col + i * direction[1]);
 			
 			if( isIn( tileToAdd))
 				areaToReturn.addTile( tileToAdd);
@@ -282,11 +281,9 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	public Area getLine( Tile base, int[] direction, int startPoint, int endPoint) {
 		
 		Area areaToReturn = new Area();
-		int row = base.row;
-		int col = base.row;
 		for( int i = startPoint; i < endPoint; i++) {
 			
-			Tile tileToAdd = getTile( row + i * direction[0], col + i * direction[1]);
+			Tile tileToAdd = getTile( base.row + i * direction[0], base.col + i * direction[1]);
 			if( isIn( tileToAdd))
 				areaToReturn.addTile( tileToAdd);
 		}
