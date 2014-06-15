@@ -3,8 +3,8 @@ package board;
 public class GridTri extends Grid {
 
 	//Properties
-	public final static int[][] DIRECTION_EVEN = {{0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIRECTION_ODD = {{-1, 0}, {0, 1}, {0, -1}};
+	public final static int[][] DIR_EVEN = {{0, 1}, {1, 0}, {0, -1}};
+	public final static int[][] DIR_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
 	//Constructors
 	public GridTri( int row, int col) {
@@ -23,10 +23,10 @@ public class GridTri extends Grid {
 		int[][] traverseArr = null;
 		
 		if( col % 2 == 0)
-			traverseArr = DIRECTION_EVEN;
+			traverseArr = DIR_EVEN;
 	
 		else
-			traverseArr = DIRECTION_ODD;
+			traverseArr = DIR_ODD;
 		
 		for( int i = 0; i < traverseArr.length; i++) {
 

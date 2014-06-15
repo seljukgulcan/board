@@ -20,17 +20,17 @@ public abstract class Board {
 	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
 	
 	//Static Methods
-	public static Grid createGridQuad( int rows, int cols) {
+	public static GridQuad createGridQuad( int rows, int cols) {
 		
 		return new GridQuad( rows, cols);
 	}
 	
-	public static Grid createGridTri( int rows, int cols) {
+	public static GridTri createGridTri( int rows, int cols) {
 		
 		return new GridTri( rows, cols);
 	}
 	
-	public static Grid createGridHex( int rows, int cols) {
+	public static GridHex createGridHex( int rows, int cols) {
 		
 		return new GridHex( rows, cols);
 	}

@@ -14,14 +14,6 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	//A - Properties & Constants
 	private int current = 0; //For implementation of iterator.
 	
-	//Constants
-	
-	//Direction Arrays
-	public final static int[][] DIR4 = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR6 = {{-1,1}, {0,1}, {1,0}, {1,-1}, {0,-1}, {-1,0}};
-	public final static int[][] DIR3_EVEN = {{0, 1}, {1, 0}, {0, -1}};
-	public final static int[][] DIR3_ODD = {{-1, 0}, {0, 1}, {0, -1}};
-	
 	protected int[][] 	direction;
 	protected int 		rows;
 	protected int 		cols;
@@ -136,6 +128,9 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 	//C.3 - Other Methods
 	public boolean isIn( Tile tile) {
 		
+		if( tile == null)
+			return false;
+		
 		return isIn( tile.row, tile.col);
 	}
 	
@@ -244,13 +239,37 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		return getRange( getTile(row, col), radiusStart, radiusEnd);
 	}
 	
+	public Area getLine( Tile base, int[] direction) {
+		
+		Area areaToReturn = new Area();
+		Tile tileToAdd = base;
+		while( isIn( tileToAdd)) {
+			
+			areaToReturn.addTile( tileToAdd);
+			tileToAdd = getTile( 	tileToAdd.row + direction[0],
+									tileToAdd.col + direction[1]);
+		}
+		
+		return areaToReturn;
+	}
+	
+	public Area getLine( int row, int col, int[] direction) {
+		
+		return getLine( getTile( row, col), direction);
+	}
+	
 	public Area getLine( Tile base, int[] direction, int length) {
 		
 		Area areaToReturn = new Area();
 		int row = base.row;
 		int col = base.row;
-		for( int i = 0; i < length; i++)
-			areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+		for( int i = 0; i < length; i++) {
+			
+			Tile tileToAdd = getTile( row + i * direction[0], col + i * direction[1]);
+			
+			if( isIn( tileToAdd))
+				areaToReturn.addTile( tileToAdd);
+		}
 		
 		return areaToReturn;
 	}
@@ -265,8 +284,12 @@ public abstract class Grid implements Iterator<Tile>, Iterable<Tile> {
 		Area areaToReturn = new Area();
 		int row = base.row;
 		int col = base.row;
-		for( int i = startPoint; i < endPoint; i++)
-			areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+		for( int i = startPoint; i < endPoint; i++) {
+			
+			Tile tileToAdd = getTile( row + i * direction[0], col + i * direction[1]);
+			if( isIn( tileToAdd))
+				areaToReturn.addTile( tileToAdd);
+		}
 		
 		return areaToReturn;
 	}
