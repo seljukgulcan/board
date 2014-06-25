@@ -17,13 +17,23 @@ public class Tile {
 
 	//A - Properties
 	
+	/**
+	 * location in the grid.
+	 */
 	public int row;
+	/**
+	 * location in the grid.
+	 */
 	public int col;
 	
 	protected Hashtable<String, Integer>	states;
 	protected Hashtable<String, Object>		objects;
 	
 	//B - Constructors
+	/**
+	 * @param row location in the grid.
+	 * @param col location in the grid.
+	 */
 	public Tile( int row, int col) {
 		
 		this.row = row;
@@ -32,6 +42,13 @@ public class Tile {
 		objects = null;
 	}
 	
+	/**
+	 * 
+	 * @param row location in the grid.
+	 * @param col location in the grid.
+	 * @param key key for the initial state
+	 * @param initialState initial state.
+	 */
 	public Tile( int row, int col, String key, int initialState) {
 		
 		this.row = row;
@@ -43,6 +60,13 @@ public class Tile {
 	
 	//C - Methods
 	//C.1 - Get Methods
+	/**
+	 * Returns the state of the tile.
+	 * 
+	 * @param key
+	 * @return state of the tile with given key.
+	 * @exception NullPointerException if there is no state with key.
+	 */
 	public int getState( String key) {
 		
 		if( states == null)
@@ -54,7 +78,15 @@ public class Tile {
 		return states.get(key);
 	}
 	
+	/**
+	 * Returns all states of the tile.
+	 * 
+	 * @return array of integers or null if states have not initialized yet.
+	 */
 	public int[] getAllStates() {
+		
+		if( states == null)
+			return null;
 		
 		int[] arr = new int[states.size()];
 		Iterator<Integer> it = states.values().iterator();
@@ -64,6 +96,12 @@ public class Tile {
 		return arr;
 	}
 	
+	/**
+	 * Returns the object with given key.
+	 * 
+	 * @param key
+	 * @return object or null if there is no match with key.
+	 */
 	public Object get( String key) {
 		
 		if( objects == null)
@@ -72,7 +110,11 @@ public class Tile {
 		return objects.get( key);
 	}
 	
-	
+	/**
+	 * Returns the number of states.
+	 * 
+	 * @return
+	 */
 	public int noStates() {
 		
 		if( states == null)
@@ -81,6 +123,11 @@ public class Tile {
 		return states.size();
 	}
 	
+	/**
+	 * Returns the number of objects the tile holds.
+	 * 
+	 * @return
+	 */
 	public int noObjects() {
 		
 		if( objects == null)
@@ -90,6 +137,12 @@ public class Tile {
 	}
 	
 	//C.2 - Set Methods
+	/**
+	 * Sets state. It may add a new state or change previous state.
+	 * 
+	 * @param key
+	 * @param state
+	 */
 	public void setState( String key, int state) {
 		
 		if( states == null)
@@ -98,6 +151,12 @@ public class Tile {
 		states.put(key, state);
 	}
 	
+	/**
+	 * Sets object. It may add a new object or change previous object.
+	 * 
+	 * @param key
+	 * @param object
+	 */
 	public void set( String key, Object object) {
 		
 		if( objects == null)
