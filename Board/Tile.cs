@@ -51,7 +51,6 @@ namespace Board
 		public int getState( string key) {
 		//public int getState( String key) {
 
-			//TODO: Exception
 			if (states == null)
 				throw new ArgumentNullException ();
 				//throw new NullPointerException();

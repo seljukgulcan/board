@@ -288,13 +288,35 @@ namespace Board
 			return getRange( getTile(row, col), radiusStart, radiusEnd);
 		}
 		
+		public Area getLine( Tile center, int[] direction) {
+			
+			Area areaToReturn = new Area();
+			Tile tileToAdd = center;
+			while (isIn( tileToAdd)) {
+
+				areaToReturn.addTile( tileToAdd);
+				tileToAdd = getTile( tileToAdd.row + direction[0],
+				                     tileToAdd.col + direction[1]);
+			}
+
+			return areaToReturn;
+		}
+
+		public Area getLine( int row, int col, int[] direction) {
+			
+			return getLine( getTile( row, col), direction);
+		}
+
 		public Area getLine( Tile center, int[] direction, int length) {
 			
 			Area areaToReturn = new Area();
-			int row = center.row;
-			int col = center.row;
-			for( int i = 0; i < length; i++)
-				areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+			for( int i = 0; i < length; i++) {
+				
+				Tile tileToAdd = getTile( center.row + i * direction[0], center.col + i * direction[1]);
+				
+				if( isIn( tileToAdd))
+					areaToReturn.addTile( tileToAdd);
+			}
 			
 			return areaToReturn;
 		}
@@ -307,12 +329,15 @@ namespace Board
 		public Area getLine( Tile center, int[] direction, int startPoint, int endPoint) {
 			
 			Area areaToReturn = new Area();
-			int row = center.row;
-			int col = center.row;
-			for( int i = startPoint; i < endPoint; i++)
-				areaToReturn.addTile( getTile( row + i * direction[0], col + i * direction[1]));
+			for( int i = startPoint; i < endPoint; i++) {
+				
+				Tile tileToAdd = getTile( center.row + i * direction[0], center.col + i * direction[1]);
+				if( isIn( tileToAdd))
+					areaToReturn.addTile( tileToAdd);
+			}
 			
 			return areaToReturn;
+
 		}
 		
 		public Area getLine( int row, int col, int[] direction, int startPoint, int endPoint) {
