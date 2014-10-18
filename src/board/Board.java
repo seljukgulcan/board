@@ -63,6 +63,11 @@ public abstract class Board {
 		return new GridHex( rows, cols);
 	}
 	
+	public static void openConsole() {
+		
+		//TODO: Fill the method
+	}
+	
 	/*public static Grid createBasicGridQuad( int rows, int cols) {
 		
 		//TODO: Fill the method
