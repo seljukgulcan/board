@@ -25,6 +25,6 @@ public class Rect extends Shape {
 	@Override
 	public void draw() {
 		
-		Draw.square( rect);
+		Draw.rectangle( rect);
 	}
 }

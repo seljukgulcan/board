@@ -12,8 +12,8 @@ public class InputValidator {
 	public static final int NO_COMMAND_FOUND = -2;
 	public static final int BAD_PARAMETERS = -3;
 	
-	private static final String syntaxRegex = "[a-z]+\\((\\d*|((\\d+,)+(\\d+)))\\)";
-	private static final String argRegex = "\\d+";
+	private static final String syntaxRegex = "[a-z]+\\((-?\\d*|((-?\\d+,)+(-?\\d+)))\\)";
+	private static final String argRegex = "-?\\d+";
 	
 	public static CommandPair validate( String in, ValidationPair validationResult) {
 		

@@ -23,6 +23,13 @@ public class CommandMode {
 		scanner = new Scanner( System.in);
 		status = STOPPED;
 	}
+	
+	public void init() {
+		
+		//TODO:Fill the method
+		
+		//init a visual opengl object
+	}
 
 	public void run() {
 		
@@ -51,6 +58,12 @@ public class CommandMode {
 				
 				System.out.println( command.command + " is not a valid board command.");
 			}
+			
+			else if( executeResult == Commands.NO_OF_ARGS_NOT_MATCHING)
+				System.out.println( "NO_OF_ARGS_NOT_MATCHING");
+			
+			else if( executeResult == Commands.WRONG_ARGS)
+				System.out.println( "WRONG_ARGS");
 		}
 	}
 	
