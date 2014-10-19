@@ -50,6 +50,8 @@ public class InputValidator {
 		int[] args = new int[noOfArg];
 		
 		int i = 0;
+		
+		argMatcher.reset();
 		while( argMatcher.find()) {
 			
 			args[i] = Integer.parseInt( argMatcher.group());

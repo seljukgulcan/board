@@ -14,7 +14,15 @@ public class Commands {
 
 	public static int execute( String command, int[] args) {
 		
-		Command commandEnum = Command.valueOf( command);
+		Command commandEnum;
+		try {
+			
+			commandEnum = Command.valueOf( command);
+		}
+		catch( IllegalArgumentException e) {
+			
+			return NO_COMMAND_FOUND;
+		}
 		switch( commandEnum) {
 		
 			case exit:
